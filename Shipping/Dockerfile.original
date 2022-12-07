@@ -10,18 +10,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Shipping/Shipping.Api.csproj", "Shipping/"]
-COPY ["Shipping.Services/Shipping.Services.csproj", "Shipping.Services/"]
-COPY ["Shipping.Data/Shipping.Infra.csproj", "Shipping.Data/"]
-RUN dotnet restore "Shipping/Shipping.Api.csproj"
+COPY ["Shipping/Shipping.csproj", "Shipping/"]
+RUN dotnet restore "Shipping/Shipping.csproj"
 COPY . .
 WORKDIR "/src/Shipping"
-RUN dotnet build "Shipping.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Shipping.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Shipping.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Shipping.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Shipping.Api.dll"]
+ENTRYPOINT ["dotnet", "Shipping.dll"]

@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -11,7 +12,7 @@ namespace Shipping.Infra.Models
 
         }
 
-        public Shipment(int ServiceId, decimal Width, decimal Height, decimal Weight, decimal Length, string CreatedBy)
+        public Shipment(int ServiceId, int Width, int Height, int Weight, int Length,int MeasurementType, string CreatedBy)
         {
             this.ServiceId = ServiceId;
             this.Width = Width;
@@ -19,15 +20,28 @@ namespace Shipping.Infra.Models
             this.Weight = Weight;
             this.Length = Length;
             this.CreatedBy = CreatedBy;
+            this.MeasurementType = MeasurementType;
         }
 
         public int Id { get; set; }
+        [Required]
         public int ServiceId { get; set; }
-        public decimal Width { get; set; }
-        public decimal Height { get; set; }
-        public decimal Weight { get; set; }
-        public decimal Length { get; set; }
+        [Range(1, int.MaxValue)]
+        public int Width { get; set; }
+        [Range(1, int.MaxValue)]
+        public int Height { get; set; }
+        [Range(1, int.MaxValue)]
+        public int Weight { get; set; }
+        [Range(1, int.MaxValue)]
+        public int Length { get; set; }
+        [Required]
+        [StringLength(200, MinimumLength = 2)]
         public string CreatedBy { get; set; }
+        [Required]
+        [Range(0, 1)]
+        public int MeasurementType { get; set; }
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [ForeignKey("ServiceId")]
         [InverseProperty("Shipments")]

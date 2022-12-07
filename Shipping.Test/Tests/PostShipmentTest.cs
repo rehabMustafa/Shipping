@@ -1,4 +1,5 @@
-﻿using Shipping.Infra.Models;
+﻿using Shipping.Infra.Helpers;
+using Shipping.Infra.Models;
 using Shipping.Infra.Repositories;
 using Shipping.Infra.Validations;
 
@@ -77,7 +78,7 @@ namespace Shipping.Test.Tests
         [Fact]
         public void Fact_PostShipment()
         {
-            var shipment = new Shipment(1, 500, 300, 400, 450, "test user");
+            var shipment = new Shipment(1, 500, 300, 400, 450, (int)Enums.MeasurementType.Metric, "test user");
 
             // REPOSITORY
             shipment = new ShipmentRepository(ctx).Post(shipment);

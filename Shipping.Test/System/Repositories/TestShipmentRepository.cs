@@ -1,11 +1,17 @@
-﻿using Shipping.Infra.Helpers;
+﻿using Microsoft.Extensions.Logging;
+using Shipping.Controllers;
+using Shipping.Infra.Helpers;
 using Shipping.Infra.Models;
 using Shipping.Infra.Repositories;
 using Shipping.Infra.Validations;
+using Shipping.Services.Services;
+using Shipping.Test.System;
+using System.Diagnostics;
+using System.Net;
 
 namespace Shipping.Test.Tests
 {
-    public class PostShipmentTest: BaseTest
+    public class PostShipmentTest : BaseTest
     {
         #region THEORY
         //[Theory]
@@ -78,6 +84,8 @@ namespace Shipping.Test.Tests
         [Fact]
         public void Fact_PostShipment()
         {
+            var service = new Service() { Name = "service 1", ProviderId = 1 };
+            ctx.Services.Add(service);
             var shipment = new Shipment(1, 500, 300, 400, 450, (int)Enums.MeasurementType.Metric, "test user");
 
             // REPOSITORY
@@ -86,6 +94,7 @@ namespace Shipping.Test.Tests
             // ASSERT
             Assert.Equal(1, shipment.Id);
         }
+
         #endregion
     }
 }

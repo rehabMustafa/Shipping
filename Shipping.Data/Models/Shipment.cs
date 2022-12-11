@@ -1,4 +1,5 @@
 ﻿
+using Shipping.Infra.Validations;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -26,13 +27,13 @@ namespace Shipping.Infra.Models
         public int Id { get; set; }
         [Required]
         public int ServiceId { get; set; }
-        [Range(1, int.MaxValue)]
+        [RangePackage(nameof(MeasurementType))]
         public int Width { get; set; }
-        [Range(1, int.MaxValue)]
+        [RangePackage(nameof(MeasurementType))]
         public int Height { get; set; }
-        [Range(1, int.MaxValue)]
+        [RangePackage(nameof(MeasurementType))]
         public int Weight { get; set; }
-        [Range(1, int.MaxValue)]
+        [RangePackage(nameof(MeasurementType))]
         public int Length { get; set; }
         [Required]
         [StringLength(200, MinimumLength = 2)]

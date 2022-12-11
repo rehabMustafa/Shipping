@@ -2,12 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Shipping.Data;
 using Shipping.Infra.Repositories;
 using Shipping.Services.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddDbContext<ShippingContext>(options => options.UseSqlServer("name=ConnectionStrings:db"));
 
 builder.Services.AddTransient<IShipmentService, ShipmentService>();

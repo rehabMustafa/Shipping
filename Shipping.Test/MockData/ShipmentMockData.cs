@@ -1,10 +1,5 @@
 ﻿using Shipping.Infra.Helpers;
 using Shipping.Infra.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shipping.Test.MockData
 {
@@ -14,13 +9,13 @@ namespace Shipping.Test.MockData
         {
             return new Shipment
             {
-                Id = 0,
+                Id = 1,
                 CreatedBy = "user 1",
                 ServiceId = 1,
-                Height = 500,
-                Length = 500,
-                Weight = 500,
-                Width = 500,
+                Height = 150,
+                Length = 150,
+                Weight = 150,
+                Width = 150,
                 MeasurementType = (int)Enums.MeasurementType.Metric,
                 CreatedAt = DateTime.Now
             };

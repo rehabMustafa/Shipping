@@ -8,7 +8,7 @@ namespace Shipping.Test.MockData
         {
             return new ServiceProvider()
             {
-                Id = 0,
+                Id = 1,
                 Name = "fedex"
             };
         }
